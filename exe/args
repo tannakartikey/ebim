@@ -1,0 +1,7 @@
+#!/usr/bin/env ruby
+
+args = ARGV.join(" ") 
+puts "Firing: eb #{args}"
+
+system("eb #{args}")
+# `#{ARGV.join(" ")}`

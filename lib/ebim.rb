@@ -1,6 +1,7 @@
 require "ebim/version"
+require "thor"
 
 module Ebim
   class Error < StandardError; end
-  # Your code goes here...
+  require 'ebim/runner'
 end

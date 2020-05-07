@@ -1,5 +1,11 @@
 require "bundler/setup"
+require "aruba/rspec"
 require "ebim"
+require './spec/support/setup'
+
+Aruba.configure do |config|
+  config.allow_absolute_paths = true
+end
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
