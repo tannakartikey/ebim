@@ -1,6 +1,6 @@
 RSpec.describe Ebim, type: :aruba do
   before(:each) do
-    cd expand_path(Dir.pwd + '/spec')
+    cd expand_path(Dir.pwd + '/spec/playground')
     append_environment_variable 'AWS_ACCESS_KEY_ID', 'aws_access_key'
     append_environment_variable 'AWS_SECRET_ACCESS_KEY', 'aws_secret_key'
   end 
@@ -22,8 +22,9 @@ RSpec.describe Ebim, type: :aruba do
   end
 
   describe Ebim::Runner, type: :aruba do
-    before(:all) { Setup.call }
-    after(:all) { Teardown.call }
+    test_environment = TestEnvironment.new
+    before(:all) { test_environment.setup }
+    after(:all) { test_environment.teardown }
 
     before(:each) { run_command command}
     before(:each) { stop_all_commands }

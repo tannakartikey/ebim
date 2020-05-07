@@ -1,7 +1,7 @@
 require "bundler/setup"
 require "aruba/rspec"
 require "ebim"
-require './spec/support/setup'
+require './spec/support/test_environment'
 
 Aruba.configure do |config|
   config.allow_absolute_paths = true
