@@ -1,5 +1,5 @@
 require 'ebim'
-require 'ebim/ebextensions'
+require 'ebim/eb'
 require 'ebim/command_environment'
 
 module Ebim
@@ -18,7 +18,7 @@ module Ebim
       @env = args.shift
       @args = args
 
-      ebextensions = Ebextensions.new(env: env)
+      ebextensions = EB.new(env: env)
       ebextensions.exist?
       ebextensions.has_eb_config?
       ebextensions.has_ebextension_configs?

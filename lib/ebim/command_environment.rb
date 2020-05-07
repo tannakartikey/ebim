@@ -1,3 +1,5 @@
+require 'ebim/eb'
+
 class CommandEnvironment
   def initialize(env:)
     env = @env
@@ -12,6 +14,10 @@ class CommandEnvironment
   end
 
   private
+
+  def get_env_files
+    Dir.entries
+  end
 
   attr_reader :env
 end

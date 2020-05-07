@@ -1,6 +1,6 @@
 require 'ebim'
 
-class Ebextensions
+class EB
   def initialize(env:)
     @env = env
   end

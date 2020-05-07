@@ -4,8 +4,8 @@ require 'rugged'
 class TestEnvironment
 
   def initialize
-    @git_repo = Dir.pwd + '/spec/playground/'
-    Dir.mkdir(@git_repo)
+    @playground_path = Dir.pwd + '/spec/playground/'
+    Dir.mkdir(@playground_path) unless Dir.exist?(@playground_path)
 
     @ebextensions_path = Dir.pwd + '/spec/playground/.ebextensions'
     @elasticbeanstalk_path = Dir.pwd + '/spec/playground/.elasticbeanstalk'
@@ -18,15 +18,21 @@ class TestEnvironment
   end
 
   def teardown
-    delete_ebconfig()
-    delete_ebextensions()
+    delete_ebconfig
+    delete_ebextensions
+    delete_playground
   end
 
   private
 
   def git_init
-    puts(`git init`)
-    puts(`git add .`)
+    puts `git init spec/playground`
+    puts `cd spec/playground && git checkout master && cd -`
+    puts `cd spec/playground && git add .ebextensions .elasticbeanstalk && cd -`
+    puts `cd spec/playground && git commit -m "Initial Commit" && cd -`
+    # @repo = Rugged::Repository.init_at(playground_path)
+    # index = repo.index
+    # puts(index.count)
   end
 
   def create_ebconfig
@@ -81,8 +87,8 @@ class TestEnvironment
   end
 
   def delete_playground
-    FileUtils.rm_rf(@git_repo)
+    FileUtils.rm_r(@playground_path, force: true)
   end
 
-  attr_reader :ebextensions_path, :elasticbeanstalk_path, :git_repo
+  attr_reader :ebextensions_path, :elasticbeanstalk_path, :playground_path, :repo
 end
