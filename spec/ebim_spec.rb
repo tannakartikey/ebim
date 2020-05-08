@@ -24,7 +24,7 @@ RSpec.describe Ebim, type: :aruba do
   describe Ebim::Runner, type: :aruba do
     test_environment = TestEnvironment.new
     before(:all) { test_environment.setup }
-    after(:all) { test_environment.teardown }
+    # after(:all) { test_environment.teardown }
 
     before(:each) { run_command command}
     before(:each) { stop_all_commands }
