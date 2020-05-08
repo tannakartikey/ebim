@@ -7,7 +7,6 @@ module Ebim
       begin
         Runner.run(args)
       rescue => err
-        raise
         puts err.message
       end
     end
