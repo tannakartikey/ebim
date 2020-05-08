@@ -1,12 +1,13 @@
 require 'ebim'
 
 class EB
+  EB_FOLDERS = ['.ebextensions', '.elasticbeanstalk']
   def initialize(env:)
     @env = env
   end
 
   def exist?
-    ['.ebextensions', '.elasticbeanstalk'].map { |folder| folder_exists? folder }
+    EB_FOLDERS.map { |folder| folder_exists? folder }
   end
 
   def has_ebextension_configs?
@@ -17,7 +18,15 @@ class EB
     raise Ebim::Error.new( "No config files with env: #{env} present!") unless files_with_env_present?(eb_config)
   end
 
+  def get_config_files
+    all_config_files.select { |file| file.split('.').last == env }
+  end
+
   private
+
+  def all_config_files
+    EB_FOLDERS.map { |folder| Dir.entries(folder) }.flatten
+  end
 
   def ebextension_configs
     @ebextension_configs ||= list_files(".ebextensions")

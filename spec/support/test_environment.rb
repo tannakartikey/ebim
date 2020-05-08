@@ -1,5 +1,4 @@
 require 'fileutils'
-require 'rugged'
 
 class TestEnvironment
 
@@ -26,13 +25,9 @@ class TestEnvironment
   private
 
   def git_init
-    puts `git init spec/playground`
-    puts `cd spec/playground && git checkout master && cd -`
-    puts `cd spec/playground && git add .ebextensions .elasticbeanstalk && cd -`
-    puts `cd spec/playground && git commit -m "Initial Commit" && cd -`
-    # @repo = Rugged::Repository.init_at(playground_path)
-    # index = repo.index
-    # puts(index.count)
+    `git init spec/playground`
+    `cd spec/playground && git add .ebextensions .elasticbeanstalk && cd -`
+    `cd spec/playground && git commit -m "Initial Commit" && cd -`
   end
 
   def create_ebconfig

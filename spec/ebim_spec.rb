@@ -35,7 +35,6 @@ RSpec.describe Ebim, type: :aruba do
 
         it "executes successfully" do
           output = last_command_started.output
-          puts output
           expect(output).to match /Firing: eb deploy --staged --no-verify-ssl --timeout 30/i
         end
       end
